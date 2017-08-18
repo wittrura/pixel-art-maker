@@ -38,14 +38,10 @@
   // view
   let view = {
     init: function() {
-      let pixels = document.getElementsByClassName('pixel');
-
-      for (var i = 0; i < pixels.length; i++) {
-        pixels[i].addEventListener('click', function() {
-          controller.paintPixel(this);
-          // this.setAttribute("style", "background-color:red;");
-        });
-      }
+      let canvas = document.getElementById('canvas');
+      canvas.addEventListener('click', function(e) {
+        controller.paintPixel(e.target);
+      });
 
       let pallete = document.getElementById('pallete');
       pallete.addEventListener('click', function(e) {
