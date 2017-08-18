@@ -2,7 +2,7 @@
 
   // config
   let config = {
-
+    countPixels: 9
   };
 
 
@@ -37,8 +37,25 @@
 
   // view
   let view = {
+    getCanvas: function() {
+      return document.getElementById('canvas');
+    },
+
+    buildPixelGrid: function() {
+      let canvas = this.getCanvas()
+
+      for (var i = 0; i < 9; i++) {
+        let pixelDiv = document.createElement('div');
+        pixelDiv.classList.add("pixel");
+        canvas.appendChild(pixelDiv);
+      }
+    },
+
+
     init: function() {
-      let canvas = document.getElementById('canvas');
+      this.buildPixelGrid();
+
+      let canvas = this.getCanvas();
       canvas.addEventListener('click', function(e) {
         controller.paintPixel(e.target);
       });
@@ -47,7 +64,6 @@
       pallete.addEventListener('click', function(e) {
         controller.updateActiveColor(e.target.dataset.color);
       });
-
 
     }
   };

@@ -14,8 +14,8 @@
 
 .canvas {
   background-color: Gainsboro;
-  width: 95%;
-  height: 75%;
+  width: 620px;
+  height: 620px;
   margin: 10px auto;
 }
 
@@ -36,8 +36,8 @@
 
 .pixel {
   float: left;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   display: block;
   overflow: hidden;
   background-color: white;
