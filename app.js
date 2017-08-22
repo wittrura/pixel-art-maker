@@ -2,7 +2,7 @@
 
   // config
   let config = {
-    countPixels: 9
+    countPixels: 100
   };
 
 
@@ -27,6 +27,7 @@
 
     paintPixel: function(pixel) {
       pixel.style.backgroundColor = this.getActiveColor();
+      pixel.style.borderColor = this.getActiveColor();
     },
 
     init: function() {
@@ -44,7 +45,7 @@
     buildPixelGrid: function() {
       let canvas = this.getCanvas()
 
-      for (var i = 0; i < 9; i++) {
+      for (var i = 0; i < config.countPixels; i++) {
         let pixelDiv = document.createElement('div');
         pixelDiv.classList.add("pixel");
         canvas.appendChild(pixelDiv);

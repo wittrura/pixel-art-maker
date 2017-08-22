@@ -1,3 +1,8 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #9d8c8c;
+}
+
 .container {
   background-color: ivory;
   border: 10px;
@@ -5,25 +10,35 @@
 }
 
 .easel {
-  background-color: lightblue;
+  background-color: Gainsboro;
   width: 720px;
-  height: 720px;
+  height: 600px;
   margin: auto;
   padding: 10px;
+  border-radius: 20px;
 }
 
 .canvas {
-  background-color: Gainsboro;
-  width: 620px;
-  height: 620px;
-  margin: 10px auto;
+  width: 95%;
+  height: 75%;
+  margin: auto;
+}
+
+.pixel {
+  float: left;
+  width: 20px;
+  height: 20px;
+  display: block;
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid Gainsboro;
 }
 
 .palette {
-  background-color: aquamarine;
   width: 95%;
-  height: 20%;
+  height: 25%;
   margin: auto;
+  padding-top: 10px;
 }
 
 .pallete-color {
@@ -31,31 +46,37 @@
   height: 20px;
   width: 20px;
   float: left;
-  margin: 5px;
+  margin: auto 5px;
 }
 
-.pixel {
-  float: left;
-  width: 200px;
-  height: 200px;
-  display: block;
-  overflow: hidden;
-  background-color: white;
-  border: 1px solid Gainsboro;
+#pallete-current-color {
+  width: 60px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: Gainsboro;
+  float:left;
 }
+
+
 
 #red {
-  background-color: red;
+  background-color: #C0392B;
 }
 
 #blue {
   background-color: blue;
 }
 
-#pallete-current-color {
-  width: 100px;
-  height: 50px;
-  border-radius: 3px;
-  background-color: Gainsboro;
-  float:right;
+#green {
+  background-color: green;
+}
+
+
+
+span {
+  font-weight: bolder;
+  float: left;
+  margin: auto 10px;
+  /*margin-left: 10px;*/
+  letter-spacing: .15em;
 }
