@@ -43,20 +43,56 @@
     },
 
     // use recursion to fill 'enclosed' areas
-    fillPixels: function(pixel) {
+    fillPixels: function fill(pixel) {
+
+      // let node = this.getIndexPixel(pixel);
+      let currentPixelIndex = controller.getIndexPixel(pixel);
       let targetColor = pixel.style.backgroundColor;
-      let replacementColor = this.getActiveColor();
+      let replacementColor = controller.getActiveColor();
+
+      console.log(pixel);
+      console.log(currentPixelIndex);
       console.log(targetColor);
       console.log(replacementColor);
+
+      if (targetColor === replacementColor) {
+        console.log('target color and replacement color are the same');
+        return null;
+      }
+      if (pixel.style.backgroundColor !== targetColor) {
+        console.log('node color is not equal to target color');
+        return null;
+      }
+
+      fill(controller.getPixelFromIndex(currentPixelIndex + 36));
+      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex - 36));
+      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex - 1));
+      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex + 1));
+
+      return true;
   //     Flood-fill (node, target-color, replacement-color):
   //  1. If target-color is equal to replacement-color, return.
   //  2. If the color of node is not equal to target-color, return.
   //  3. Set the color of node to replacement-color.
   //  4. Perform Flood-fill (one step to the south of node, target-color, replacement-color).
+          // +36
   //     Perform Flood-fill (one step to the north of node, target-color, replacement-color).
+          // -36
   //     Perform Flood-fill (one step to the west of node, target-color, replacement-color).
+          // -1
   //     Perform Flood-fill (one step to the east of node, target-color, replacement-color).
+          // +1
   //  5. Return.
+    },
+
+    getIndexPixel: function(pixel) {
+      let pixels = Array.prototype.slice.call(document.body.querySelectorAll('.pixel'));
+      return pixels.indexOf(pixel);
+    },
+
+    getPixelFromIndex: function(pixelIndex) {
+      let pixels = Array.prototype.slice.call(document.body.querySelectorAll('.pixel'));
+      return pixels[pixelIndex];
     },
 
     // to track when combining mousedown and mouseover events
@@ -80,6 +116,7 @@
       for (var i = 0; i < config.countPixels; i++) {
         let pixelDiv = document.createElement('div');
         pixelDiv.classList.add("pixel");
+        pixelDiv.style.backgroundColor = 'white';
         canvas.appendChild(pixelDiv);
       }
     },
@@ -128,9 +165,9 @@
         controller.mouseDown = true;
         // reset to default if the pixel is already the active color
         // OR paint that pixel if it is a different color
-        // if (document.getElementById('fillCheck').checked) {
-        //   controller.fillPixels(e.target);
-        // }
+        if (document.getElementById('fillCheck').checked) {
+          controller.fillPixels(e.target);
+        }
 
         if (e.target.style.backgroundColor === controller.getActiveColor()) {
           controller.resetPixel(e.target);
