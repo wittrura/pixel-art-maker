@@ -70,6 +70,11 @@
         palette.appendChild(colorSwatch);
       });
 
+      let userSelect = document.createElement('input');
+      userSelect.className = 'palette-color';
+      userSelect.type = 'color';
+      palette.appendChild(userSelect);
+
       let span = document.createElement('span');
       span.innerText = 'CURRENT COLOR ->';
       palette.appendChild(span);
@@ -88,28 +93,26 @@
       canvas.addEventListener('mousedown', function(e) {
         controller.mouseDown = true;
         controller.paintPixel(e.target);
-        // console.log('controller.mouseDown: ' + controller.mouseDown);
       });
 
       canvas.addEventListener('mouseup', function(e) {
         controller.mouseDown = false;
-        // console.log('controller.mouseDown: ' + controller.mouseDown);
       });
 
       canvas.addEventListener('mouseover', function(e) {
         if (controller.mouseDown) {
           controller.paintPixel(e.target);
-          // console.log('this should fill with paint');
-        } else {
-          // console.log('entered but mouse was NOT down')
         }
       });
-
 
 
       let palette = document.getElementById('palette');
       palette.addEventListener('click', function(e) {
         controller.updateActiveColor(e.target.style.backgroundColor);
+      });
+
+      palette.addEventListener('input', function(e) {
+        controller.updateActiveColor(e.target.value);
       });
     },
 
