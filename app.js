@@ -36,6 +36,8 @@
       pixel.style.borderColor = this.getActiveColor();
     },
 
+    mouseDown: false,
+
     init: function() {
       view.init();
     }
@@ -82,6 +84,28 @@
       canvas.addEventListener('click', function(e) {
         controller.paintPixel(e.target);
       });
+
+      canvas.addEventListener('mousedown', function(e) {
+        controller.mouseDown = true;
+        controller.paintPixel(e.target);
+        // console.log('controller.mouseDown: ' + controller.mouseDown);
+      });
+
+      canvas.addEventListener('mouseup', function(e) {
+        controller.mouseDown = false;
+        // console.log('controller.mouseDown: ' + controller.mouseDown);
+      });
+
+      canvas.addEventListener('mouseover', function(e) {
+        if (controller.mouseDown) {
+          controller.paintPixel(e.target);
+          // console.log('this should fill with paint');
+        } else {
+          // console.log('entered but mouse was NOT down')
+        }
+      });
+
+
 
       let palette = document.getElementById('palette');
       palette.addEventListener('click', function(e) {
