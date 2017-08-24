@@ -12,7 +12,6 @@
                   ]
   };
 
-
   // model
   let model = {
     brushColor: ''
@@ -78,10 +77,7 @@
       palette.appendChild(currentColor);
     },
 
-    init: function() {
-      this.buildPixelGrid();
-      this.buildPalette();
-
+    addListeners: function() {
       let canvas = this.getCanvas();
       canvas.addEventListener('click', function(e) {
         controller.paintPixel(e.target);
@@ -91,7 +87,12 @@
       palette.addEventListener('click', function(e) {
         controller.updateActiveColor(e.target.style.backgroundColor);
       });
+    },
 
+    init: function() {
+      this.buildPixelGrid();
+      this.buildPalette();
+      this.addListeners();
     }
   };
 

@@ -19,7 +19,7 @@ span {
 .easel {
   background-color: Gainsboro;
   width: 740px;
-  height: 600px;
+  height: 560px;
   margin: auto;
   padding: 10px;
   border-radius: 20px;
@@ -44,7 +44,7 @@ span {
 
 .palette {
   width: 95%;
-  height: 25%;
+  height: 15%;
   margin: auto;
   padding-top: 10px;
 }
