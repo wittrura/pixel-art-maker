@@ -36,6 +36,13 @@
       pixel.style.borderColor = this.getActiveColor();
     },
 
+    // resets to the default colors of the pixels
+    resetPixel: function(pixel) {
+      pixel.style.backgroundColor = 'white';
+      pixel.style.borderColor = 'gainsboro';
+    },
+
+    // to track when combining mousedown and mouseover events
     mouseDown: false,
 
     init: function() {
@@ -86,13 +93,16 @@
 
     addListeners: function() {
       let canvas = this.getCanvas();
-      canvas.addEventListener('click', function(e) {
-        controller.paintPixel(e.target);
-      });
 
       canvas.addEventListener('mousedown', function(e) {
         controller.mouseDown = true;
-        controller.paintPixel(e.target);
+        // reset to default if the pixel is already the active color
+        // OR paint that pixel if it is a different color
+        if (e.target.style.backgroundColor === controller.getActiveColor()) {
+          controller.resetPixel(e.target);
+        } else {
+          controller.paintPixel(e.target);
+        }
       });
 
       canvas.addEventListener('mouseup', function(e) {
