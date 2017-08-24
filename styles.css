@@ -4,6 +4,13 @@ body {
   background-color: ivory;
 }
 
+span {
+  font-weight: bolder;
+  float: left;
+  margin: 5px 10px;
+  letter-spacing: .15em;
+}
+
 .container {
   border: 10px;
   padding: 10px;
@@ -11,7 +18,7 @@ body {
 
 .easel {
   background-color: Gainsboro;
-  width: 720px;
+  width: 740px;
   height: 600px;
   margin: auto;
   padding: 10px;
@@ -20,15 +27,15 @@ body {
 }
 
 .canvas {
-  width: 95%;
-  height: 75%;
+  width: 720px;
+  height: 480px;
   margin: auto;
 }
 
 .pixel {
   float: left;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: block;
   overflow: hidden;
   background-color: white;
@@ -42,42 +49,19 @@ body {
   padding-top: 10px;
 }
 
-.pallete-color {
+.palette-color {
   border-radius: 20px;
   height: 20px;
   width: 20px;
   float: left;
-  margin: auto 5px;
+  margin: 5px 5px;
 }
 
-#pallete-current-color {
+#palette-current-color {
   width: 60px;
   height: 20px;
   border-radius: 3px;
   background-color: Gainsboro;
   float:left;
-}
-
-
-
-#red {
-  background-color: #C0392B;
-}
-
-#blue {
-  background-color: blue;
-}
-
-#green {
-  background-color: green;
-}
-
-
-
-span {
-  font-weight: bolder;
-  float: left;
-  margin: auto 10px;
-  /*margin-left: 10px;*/
-  letter-spacing: .15em;
+  margin: 5px 5px;
 }
