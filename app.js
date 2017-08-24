@@ -42,6 +42,23 @@
       pixel.style.borderColor = 'gainsboro';
     },
 
+    // use recursion to fill 'enclosed' areas
+    fillPixels: function(pixel) {
+      let targetColor = pixel.style.backgroundColor;
+      let replacementColor = this.getActiveColor();
+      console.log(targetColor);
+      console.log(replacementColor);
+  //     Flood-fill (node, target-color, replacement-color):
+  //  1. If target-color is equal to replacement-color, return.
+  //  2. If the color of node is not equal to target-color, return.
+  //  3. Set the color of node to replacement-color.
+  //  4. Perform Flood-fill (one step to the south of node, target-color, replacement-color).
+  //     Perform Flood-fill (one step to the north of node, target-color, replacement-color).
+  //     Perform Flood-fill (one step to the west of node, target-color, replacement-color).
+  //     Perform Flood-fill (one step to the east of node, target-color, replacement-color).
+  //  5. Return.
+    },
+
     // to track when combining mousedown and mouseover events
     mouseDown: false,
 
@@ -82,22 +99,39 @@
       userSelect.type = 'color';
       palette.appendChild(userSelect);
 
-      let span = document.createElement('span');
-      span.innerText = 'CURRENT COLOR ->';
-      palette.appendChild(span);
+      //
+      let textCurrentColor = document.createElement('span');
+      textCurrentColor.innerText = 'CURRENT COLOR ->';
+      palette.appendChild(textCurrentColor);
 
       let currentColor = document.createElement('div');
       currentColor.id = 'palette-current-color';
       palette.appendChild(currentColor);
+
+      //
+      let fillLabel = document.createElement('label');
+      fillLabel.htmlFor = 'fillCheck';
+      fillLabel.innerText = 'ENABLE FILL';
+      palette.appendChild(fillLabel);
+
+      let fill = document.createElement('input');
+      fill.type = 'checkbox';
+      fill.id = 'fillCheck';
+      palette.appendChild(fill);
     },
 
     addListeners: function() {
       let canvas = this.getCanvas();
 
+      //
       canvas.addEventListener('mousedown', function(e) {
         controller.mouseDown = true;
         // reset to default if the pixel is already the active color
         // OR paint that pixel if it is a different color
+        // if (document.getElementById('fillCheck').checked) {
+        //   controller.fillPixels(e.target);
+        // }
+
         if (e.target.style.backgroundColor === controller.getActiveColor()) {
           controller.resetPixel(e.target);
         } else {
@@ -115,7 +149,7 @@
         }
       });
 
-
+      //
       let palette = document.getElementById('palette');
       palette.addEventListener('click', function(e) {
         controller.updateActiveColor(e.target.style.backgroundColor);
