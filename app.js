@@ -43,46 +43,49 @@
     },
 
     // use recursion to fill 'enclosed' areas
-    fillPixels: function fill(pixel) {
+    fillPixels: function fill(pixel, targetColor, replacementColor) {
 
       // let node = this.getIndexPixel(pixel);
       let currentPixelIndex = controller.getIndexPixel(pixel);
-      let targetColor = pixel.style.backgroundColor;
-      let replacementColor = controller.getActiveColor();
+      // let targetColor = pixel.style.backgroundColor;
+      // let replacementColor = controller.getActiveColor();
 
       console.log(pixel);
       console.log(currentPixelIndex);
-      console.log(targetColor);
-      console.log(replacementColor);
+      console.log('target color:' + targetColor);
+      console.log('replacement color:' + replacementColor);
 
+      //  1. If target-color is equal to replacement-color, return.
       if (targetColor === replacementColor) {
         console.log('target color and replacement color are the same');
-        return null;
+        return ;
       }
+      //  2. If the color of node is not equal to target-color, return.
       if (pixel.style.backgroundColor !== targetColor) {
         console.log('node color is not equal to target color');
-        return null;
+        return ;
       }
 
-      fill(controller.getPixelFromIndex(currentPixelIndex + 36));
-      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex - 36));
-      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex - 1));
-      // this.fillPixels(this.getPixelFromIndex(currentPixelIndex + 1));
+      //  3. Set the color of node to replacement-color.
+      pixel.style.backgroundColor = replacementColor;
+      pixel.style.borderColor = replacementColor;
 
+
+      // 4. Perform Flood-fill (one step to the south of node, target-color, replacement-color).
+              // +36
+      //     Perform Flood-fill (one step to the north of node, target-color, replacement-color).
+              // -36
+      //     Perform Flood-fill (one step to the west of node, target-color, replacement-color).
+              // -1
+      //     Perform Flood-fill (one step to the east of node, target-color, replacement-color).
+              // +1
+      fill(controller.getPixelFromIndex(currentPixelIndex + 36), targetColor, replacementColor);
+      fill(controller.getPixelFromIndex(currentPixelIndex - 36), targetColor, replacementColor);
+      fill(controller.getPixelFromIndex(currentPixelIndex - 1), targetColor, replacementColor);
+      fill(controller.getPixelFromIndex(currentPixelIndex + 1), targetColor, replacementColor);
+
+      //  5. Return.
       return true;
-  //     Flood-fill (node, target-color, replacement-color):
-  //  1. If target-color is equal to replacement-color, return.
-  //  2. If the color of node is not equal to target-color, return.
-  //  3. Set the color of node to replacement-color.
-  //  4. Perform Flood-fill (one step to the south of node, target-color, replacement-color).
-          // +36
-  //     Perform Flood-fill (one step to the north of node, target-color, replacement-color).
-          // -36
-  //     Perform Flood-fill (one step to the west of node, target-color, replacement-color).
-          // -1
-  //     Perform Flood-fill (one step to the east of node, target-color, replacement-color).
-          // +1
-  //  5. Return.
     },
 
     getIndexPixel: function(pixel) {
@@ -166,7 +169,7 @@
         // reset to default if the pixel is already the active color
         // OR paint that pixel if it is a different color
         if (document.getElementById('fillCheck').checked) {
-          controller.fillPixels(e.target);
+          controller.fillPixels(e.target, e.target.style.backgroundColor, controller.getActiveColor());
         }
 
         if (e.target.style.backgroundColor === controller.getActiveColor()) {
